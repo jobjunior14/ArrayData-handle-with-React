@@ -2,12 +2,24 @@ import { dataArray } from "./StudentArray";
 import { useState } from "react";
 import { GeneralTable } from "./TableComponent";
 import { BtnHandle } from "./Buttons";
+
+let indexOFTable; 
+
 export function PrincipalTableHandling ()
 {
-    const [clickVerificationState, setclickVerificationState] = useState(dataArray);
+    const [DataFromArray, setDataFromArray] = useState(dataArray);
+    const [searchValue, setSearchValue] = useState('');
+    const [modificationVerification, setmodificationVerification] = useState(false)
 
+    function searchFunction (e) 
+    {
+        setSearchValue(
+            prev => prev = e.target.value
+        )
+    }
+    
     function changeVerification(id) {
-        setclickVerificationState(
+        setDataFromArray(
             prev => {
                 return prev.map((square) => {
                     return square.id === id ? { ...square, clickVerification: !square.clickVerification } : square
@@ -19,8 +31,7 @@ export function PrincipalTableHandling ()
 
     function saveData (id, name, value)
     { 
-        
-        setclickVerificationState (
+        setDataFromArray (
             prev => {
                 return prev.map ( (data)=> {
                     return data.id === id ? {...data, [name]:value} :data
@@ -28,26 +39,46 @@ export function PrincipalTableHandling ()
                 )
             }
         )
-        console.log (clickVerificationState, id, name);
+
+        setmodificationVerification (true)
     }
 
-    let displayInformation = clickVerificationState.map 
+    let displayInformation = DataFromArray.map 
     (
         prev => {
-            return <GeneralTable 
+            return searchValue === '' ? 
+            <GeneralTable 
                 prev = {prev}   
                 clickVerification = {prev.clickVerification}  
                 key = {prev.id} 
                 changeState = {changeVerification} 
                 saveData = {saveData}
+                onclick = {index}
                 
-            />
+            /> :
+                ((prev.nom.toLowerCase().includes(searchValue.toLowerCase()) || prev.nom.toUpperCase().includes(searchValue.toUpperCase()) ) && 
+                <GeneralTable
+                    prev={prev}
+                    clickVerification={prev.clickVerification}
+                    key={prev.id}
+                    changeState={changeVerification}
+                    saveData={saveData}
+                    onclick={index}
+                />
+            )  
         }
     )
 
+    function index (e)
+    {
+        const {id} = e.target
+        console.log (id);
+        return indexOFTable = id;
+    }
+
     function New()
     {
-        setclickVerificationState (
+        setDataFromArray (
             prev => {
                 return [...prev, {
                     nom: '',
@@ -60,24 +91,61 @@ export function PrincipalTableHandling ()
         )
     }
 
-    function Delete (e)
+    function Delete ()
     {
-        const {id} = e.target
-        console.log (id);
+        setDataFromArray(
+            prev => {
+                prev = [...prev]
+                const array = prev.splice(indexOFTable, 1);
+                for ( let i = 0; i < prev.length; i++)
+                {
+                    prev[i].id = i
+                }
+                return prev;
+            }
+        )
+        setmodificationVerification(true);
     }
-    return (
 
+    function saveInLocalStorage ()
+    {
+        setDataFromArray(
+            prev => {
+                prev = [...prev]
+                for (let i = 0; i < prev.length; i++) {
+                    prev[i].id = i
+                }
+                return prev;
+            }
+        )
+
+        localStorage.setItem("myDataArray", JSON.stringify(DataFromArray));
+        
+        setmodificationVerification(false);
+    }
+
+    return (
         <div>
-            <div>
+            <form>
+                <input
+                    type='text'
+                    placeholder="Search a particulaar student"
+                    onChange={searchFunction}
+                />
+            </form>
+            <table>
                 <tr>
                     <th>Nom</th>
                     <th>Age</th>
+                    <th>Number</th>
                     <th>Fac</th>
                 </tr>
                 {displayInformation}
-            </div>
-            <BtnHandle NewData = {New} Delete = {Delete} />
+            </table>
+
+            {modificationVerification && <p color="red" >Si vous enregistrez pas, les modifictions apportées seront perdues </p>}
+            <BtnHandle NewData = {New} Delete = {Delete} save = {saveInLocalStorage} />
+           
         </div>
     )
-
 }
