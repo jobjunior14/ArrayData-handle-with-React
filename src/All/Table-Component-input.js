@@ -2,10 +2,9 @@
 export function GeneralTable (props)
 {
     return (
-        <tr onClick={props.onclick} onDoubleClick={() => props.changeState(props.prev.id)}>
-            {(!props.clickVerification) ?
-                <td id={props.prev.id} name={`nom${props.prev.id}`} > {props.prev.nom} </td> :
-                <td id={props.prev.id} name={`nom${props.prev.id}`}  >
+        <tr >
+            {
+                <td id={props.prev.id} name={`nom${props.prev.id}`}   >
                     <input
                         defaultValue={props.prev.nom}
                         id={props.prev.id}
@@ -13,16 +12,16 @@ export function GeneralTable (props)
                         placeholder='Nom Complet'
                         onChange={(e) => {
                             const { name, value } = e.target
-                            return props.saveData(props.prev.id, name, value)
+                            return props.Uptading_Data_In_Form_f(props.prev.id, name, value)
                         }
                         }
-                    />
+                        onFocus= { (e) =>{ return props.onclick(props.prev.index) } }
+                    /> 
                 </td>
             }
 
-            {(!props.clickVerification) ?
-                <td id={props.prev.id} name={`age${props.prev.id}`}> {props.prev.age} </td> :
-                <td id={props.prev.id} name={`age${props.prev.id}`} >
+            {
+                <td id={props.prev.id} name={`age${props.prev.id}`}  >
                     <input
                         defaultValue={props.prev.age}
                         id={props.prev.id}
@@ -32,16 +31,16 @@ export function GeneralTable (props)
                         onChange=
                         {(e) => {
                             const { name, value } = e.target
-                            return props.saveData(props.prev.id, name, value)
+                            return props.Uptading_Data_In_Form_f(props.prev.id, name, value)
                         }
                         }
+                        onFocus= { (e) =>{ return props.onclick(props.prev.index) } }
                     />
                 </td>
             }
 
-            {(!props.clickVerification) ?
-                <td id={props.prev.id} name={`age${props.prev.id}`}> {props.prev.number} </td> :
-                <td id={props.prev.id} name={`age${props.prev.id}`} >
+            {
+                <td id={props.prev.id} name={`age${props.prev.id}`}  >
                     <input
                         defaultValue={props.prev.number}
                         id={props.prev.id}
@@ -51,16 +50,16 @@ export function GeneralTable (props)
                         onChange=
                         {(e) => {
                             const { name, value } = e.target
-                            return props.saveData(props.prev.id, name, value)
+                            return props.Uptading_Data_In_Form_f(props.prev.id, name, value)
                         }
                         }
+                        onFocus= { (e) =>{ return props.onclick(props.prev.index) } }
                     />
                 </td>
             }
 
-            {(!props.clickVerification) ?
-                <td id={props.prev.id} name={`fac${props.prev.id}`} > {props.prev.fac} </td> :
-                <td id={props.prev.id} name={`fac${props.prev.id}`} >
+            {
+                <td id={props.prev.id} name={`fac${props.prev.id}`} index = {props.prev.index} >
                     <input
                         defaultValue={props.prev.fac}
                         id={props.prev.id}
@@ -69,9 +68,10 @@ export function GeneralTable (props)
                         name={`fac`}
                         onChange={(e) => {
                             const { name, value } = e.target
-                            return props.saveData(props.prev.id, name, value)
+                            return props.Uptading_Data_In_Form_f(props.prev.id, name, value)
                         }
                         }
+                        onFocus= { (e) =>{ return props.onclick(props.prev.index) } }
                     />
                 </td>
             }

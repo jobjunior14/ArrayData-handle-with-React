@@ -4,9 +4,9 @@ export function BtnHandle (props)
     
     return (
         <div>
-            <button onClick={props.NewData}> New </button>
-            <button onClick={props.save}> Save </button>
-            <button onClick={props.Delete}> Delete </button>
+            <button onClick={props.NewData} className="newBtn"> New </button>
+            <button onClick={props.save} className="saveBtn"> Save </button>
+            <button onClick={props.Delete} className="deleteBtn"> Delete </button>
         </div>
     )
 }

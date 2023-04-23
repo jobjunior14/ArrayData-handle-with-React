@@ -29,3 +29,70 @@ table, body
 {
   text-align: center;
 }
+
+table
+{
+  margin: auto;
+}
+
+button 
+{
+  border-radius: 5px;
+  width: 60px;
+  padding: 5px 10px;
+  margin: 15px;
+  border: 1px solid #a3b5bd;
+  box-shadow: #282c34;
+}
+
+button:hover
+{
+  background-color: #a3b5bd;
+  color: white;
+  transform: scale(1.1);
+}
+
+button:active
+{
+  background-color: #3a555f ;
+  padding: 3px 8px;
+}
+input
+{
+  margin: 5px;
+  width: 190px;
+  padding: 2px 0px;
+  padding-left: 5px;
+
+}
+
+.search-form
+{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 180px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid rgb(182, 174, 174);
+ 
+}
+
+input:active
+{
+  border:1px solid rgb(182, 174, 174);
+}
+
+input:hover
+{
+  border:1px solid rgb(45, 33, 112);
+}
+
+select
+{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 180px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid rgb(182, 174, 174);
+}
