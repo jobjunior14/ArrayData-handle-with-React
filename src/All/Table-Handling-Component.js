@@ -1,8 +1,8 @@
-import { dataArray } from "./StudentArray";
+import { dataArray } from "./data/StudentArray";
 import { useState, useEffect } from "react";
-import { GeneralTable } from "./Table-Component-input";
-import { BtnHandle } from "./Buttons";
-import { profileComponent } from "./profil/profil-component";
+import { GeneralTable } from "./components/Table-Component-input";
+import { BtnHandle } from "./components/Buttons";
+import { profileComponent } from "./profil/profil-display";
 
 export function PrincipalTableHandling ()
 {
@@ -69,7 +69,7 @@ export function PrincipalTableHandling ()
             />) : ( form_filter.search === '' && form_filter.filter !== '' ) ?
 
             (
-                prev.fac === form_filter.filter && (
+                prev.fac === form_filter.filter.toLowerCase() && (
                 <GeneralTable 
                     prev = {prev}   
                     clickVerification = {prev.clickVerification}  
@@ -81,7 +81,7 @@ export function PrincipalTableHandling ()
 
             (
                 (   ( form_filter.filter === '') ? ( prev.nom.toLowerCase().includes(form_filter.search.toLowerCase()) || prev.nom.toUpperCase().includes(form_filter.search.toUpperCase()) ) :
-                ( ( prev.nom.toLowerCase().includes(form_filter.search.toLowerCase()) || prev.nom.toUpperCase().includes(form_filter.search.toUpperCase()) ) && prev.fac === form_filter.filter)
+                ( ( prev.nom.toLowerCase().includes(form_filter.search.toLowerCase()) || prev.nom.toUpperCase().includes(form_filter.search.toUpperCase()) ) && prev.fac === form_filter.filter.toLowerCase())
                 ) && 
                ( 
                <GeneralTable
@@ -230,7 +230,8 @@ export function PrincipalTableHandling ()
         setmodificationVerification(false);
     }
 
-    // Retunirng a array of objects.......................................................
+    // Retunirng a array of objects......................................................
+    
     return (
         <div>
 

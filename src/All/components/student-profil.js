@@ -1,11 +1,10 @@
 
-
 export function MyProfile (props)
 {
 
     return (
         <div>
-            <img src= 'C:/Users/junio/OneDrive/Documents/JavaSciprt/student-project/src/All/hey.jpg' alt = 'profile image'  width={300} height={400}/>
+            <img src= 'C:/Users/junio/OneDrive/Documents/JavaSciprt/student-project/src/All/hey.jpg' alt = 'profile '  width={300} height={400}/>
             <h4> { props.prev.nom } </h4>
             <pre> { props.prev.matricul } </pre>
             <div>
